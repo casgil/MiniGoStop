@@ -1,3 +1,10 @@
+let stopTrials = 2;
+let targetTrials = 2;
+let novelTrials = 4;
+let stimDuration = 500;
+let fixDuration = 1000;
+let interval = 150;
+
 function getStim() {
     var number = Math.floor(Math.random() * 90000) + 10000;
     number.toString();
@@ -22,12 +29,70 @@ function shuffle(array) {
     return array;
 }
 
-var stopList = [getStim(), getStim()];
-var targetList = [getStim(), getStim()];
-var novelList = [getStim(), getStim(), getStim(), getStim()];
+function createTrials(stopTrials, targetTrials, novelTrials) {
+    var stopList = [getStim(), getStim()];
+    var targetList = [getStim(), getStim()];
+    var novelList = [getStim(), getStim(), getStim(), getStim()];
+    let List = [];
+for (var i = 0; i < stopTrials; i++) {
+    var stopTrial =  {
+        type: jsPsychHtmlButtonResponse,
+        choices: ['✓'],
+        button_html: '<button class="button">%choice%</button>',
+        response_ends_trial: false,
+        timeline: [
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+stopList[i]+'</p>', trial_duration: stimDuration, stimulus_duration: stimDuration, data: {type: 'novel', correct_response: null}},
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}},
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+stopList[i]+'</p>', trial_duration: interval, stimulus_duration: interval, data: {type: 'stop', correct_response: null}},
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#ffc90e">'+stopList[i]+'</p>', trial_duration: stimDuration - interval, stimulus_duration: stimDuration - interval, data: {type: 'stop', correct_response: null}},
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}}
+        ],
+        on_finish: function(data){
+          console.log();
+          data.correct = data.response === data.correct_response;
+        }
+    }
+    List.push(stopTrial)
+}
+for (var i = 0; i < targetTrials; i++) {
+   var targetTrial =  {
+        type: jsPsychHtmlButtonResponse,
+        choices: ['✓'],
+        button_html: '<button class="button">%choice%</button>',
+        response_ends_trial: false,
+        timeline: [
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[i]+'</p>', trial_duration: stimDuration, stimulus_duration: stimDuration, data: {type: 'novel', correct_response: null}},
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}},
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[i]+'</p>', trial_duration: stimDuration, stimulus_duration: stimDuration, data: {type: 'target', correct_response: 0}},
+            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}}
+        ],
+        on_finish: function(data){
+          console.log();
+          data.correct = data.response === data.correct_response;
+        }
+    }
+    List.push(targetTrial)
+}
+for (var i = 0; i < novelTrials; i++) {
+    var novelTrial = {
+        type: jsPsychHtmlButtonResponse,
+        choices: ['✓'],
+          button_html: '<button class="button">%choice%</button>',
+          response_ends_trial: false,
+        timeline: [
+        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+novelList[i]+'</p>', trial_duration: stimDuration,  stimulus_duration: stimDuration, data: {type: 'novel', correct_response: null}},
+        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration,  stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}},
+        ],
+        on_finish: function(data){
+          console.log();
+          data.correct = data.response === data.correct_response;
+        }
+      }
+     List.push(novelTrial)
+ }
+return List;
+}
 
-
-/* create timeline */
 var timeline = [];
 
 var instructions1 = {
@@ -54,142 +119,9 @@ var instructions2 = {
 };
 timeline.push(instructions2);
 
-var stop_trial1 = {
-    type: jsPsychHtmlButtonResponse,
-    choices: ['✓'],
-    button_html: '<button class="button">%choice%</button>',
-    response_ends_trial: false,
-    timeline: [
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+stopList[0]+'</p>', trial_duration: 1000, stimulus_duration: 1000, data: {type: 'novel', correct_response: null}},
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500, stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}},
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+stopList[0]+'</p>', trial_duration: 200, stimulus_duration: 200, data: {type: 'stop', correct_response: null}},
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#ffc90e">'+stopList[0]+'</p>', trial_duration: 800, stimulus_duration: 800, data: {type: 'stop', correct_response: null}},
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500, stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}}
-    ],
-    on_finish: function(data){
-      console.log();
-      data.correct = data.response === data.correct_response;
-    }
-}
-
-var stop_trial2 = {
-    type: jsPsychHtmlButtonResponse,
-    choices: ['✓'],
-    button_html: '<button class="button">%choice%</button>',
-    response_ends_trial: false,
-    timeline: [
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+stopList[1]+'</p>', trial_duration: 1000, stimulus_duration: 1000, data: {type: 'novel', correct_response: null}},
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500, stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}},
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+stopList[1]+'</p>', trial_duration: 200, stimulus_duration: 200, data: {type: 'stop', correct_response: null}},
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#ffc90e">'+stopList[1]+'</p>', trial_duration: 800, stimulus_duration: 800, data: {type: 'stop', correct_response: null}},
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500, stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}}
-  ],
-  on_finish: function(data){
-    console.log();
-    data.correct = data.response === data.correct_response;
-  }
-}
-
-var target_trial1 = {
-    type: jsPsychHtmlButtonResponse,
-    choices: ['✓'],
-    button_html: '<button class="button">%choice%</button>',
-    response_ends_trial: false,
-    timeline: [
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[0]+'</p>', trial_duration: 1000, stimulus_duration: 1000, data: {type: 'novel', correct_response: null}},
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500, stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}},
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[0]+'</p>', trial_duration: 1000, stimulus_duration: 1000, data: {type: 'target', correct_response: 0}},
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500, stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}}
-    ],
-    on_finish: function(data){
-      console.log();
-      data.correct = data.response === data.correct_response;
-    }
-}
-
-
-
-var target_trial2 = {
-    type: jsPsychHtmlButtonResponse,
-    choices: ['✓'],
-    button_html: '<button class="button">%choice%</button>',
-    response_ends_trial: false,
-    timeline: [
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[1]+'</p>', trial_duration: 1000, stimulus_duration: 1000, data: {type: 'novel', correct_response: null}},
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500, stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}},
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[1]+'</p>', trial_duration: 1000, stimulus_duration: 1000, data: {type: 'target', correct_response: 0}},
-      {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500, stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}}
-  ],
-    on_finish: function(data){
-      console.log();
-      data.correct = data.response === data.correct_response;
-    }
-}
-
-var novel_trial1 = {
-  type: jsPsychHtmlButtonResponse,
-  choices: ['✓'],
-    button_html: '<button class="button">%choice%</button>',
-    response_ends_trial: false,
-  timeline: [
-  {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+novelList[0]+'</p>', trial_duration: 1000,  stimulus_duration: 1000, data: {type: 'novel', correct_response: null}},
-  {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500,  stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}},
-  ],
-  on_finish: function(data){
-    console.log();
-    data.correct = data.response === data.correct_response;
-  }
-};
-
-var novel_trial2 = {
-  type: jsPsychHtmlButtonResponse,
-  choices: ['✓'],
-  button_html: '<button class="button">%choice%</button>',
-  response_ends_trial: false,
-  timeline: [
-    {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+novelList[1]+'</p>', trial_duration: 1000,  stimulus_duration: 1000, data: {type: 'novel', correct_response: null}},
-    {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500,  stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}},
-    ],
-  on_finish: function(data){
-    console.log();
-    data.correct = data.response === data.correct_response;
-  }
-};
-
-var novel_trial3 = {
-  type: jsPsychHtmlButtonResponse,
-  choices: ['✓'],
-  button_html: '<button class="button">%choice%</button>',
-  response_ends_trial: false,
-  timeline: [
-    {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+novelList[2]+'</p>', trial_duration: 1000,  stimulus_duration: 1000, data: {type: 'novel', correct_response: null}},
-    {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500,  stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}},
-    ],
-  on_finish: function(data){
-    console.log();
-    data.correct = data.response === data.correct_response;
-  }
-};
-
-var novel_trial4 = {
-  type: jsPsychHtmlButtonResponse,
-  choices: ['✓'],
-  button_html: '<button class="button">%choice%</button>',
-  response_ends_trial: false,
-  timeline: [
-    {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+novelList[3]+'</p>', trial_duration: 1000,  stimulus_duration: 1000, data: {type: 'novel', correct_response: null}},
-    {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: 1500,  stimulus_duration: 1500, data: {type: 'fixation', correct_response: null}},
-    ],
-  on_finish: function(data){
-    console.log();
-    data.correct = data.response === data.correct_response;
-  }
-};
-
-
 var task_procedure = {
     //shuffle fn returns timeline list of randomized trials e.g. (novel5, stop3, ...,target1, novel1)
-    timeline: shuffle([novel_trial1, novel_trial2, novel_trial3, novel_trial4, target_trial1, target_trial, stop_trial1, stop_trial2]),
+    timeline: shuffle(createTrials(stopTrials,targetTrials,novelTrials)),
 }
 timeline.push(task_procedure);
 
