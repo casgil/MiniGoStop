@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mini GoStop</title>
+    
+    <script src="./jspsych/jspsych.js"></script>
+    <script src="./jspsych/plugin-html-keyboard-response.js"></script>
+    <script src="./jspsych/plugin-html-button-response.js"></script>
+    <link href="./jspsych/jspsych.css" rel="stylesheet" type="text/css" />
+    <script src="./main.js"></script>
+    <style>
+      #display_stage_background {
+        width: 100vw;
+        background-color: white;
+        z-index: -1;
+      }
+
+      #display_stage {
+        position: fixed;
+        left: 1vw;
+        top: 1vh;
+        height: 98vh;
+        width: 98vw;
+        background-color: white;
+        box-shadow: 1px 1px 1px #999;
+        border-radius: 15px;
+        z-index: 0;
+        overflow-y: hidden;
+        overflow-x: hidden; 
+        }       
+        .button {
+            background-color: #3f48cc; 
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50%;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 60px;
+            font-weight: bold;
+            margin: 60px 60px;
+            box-shadow: 0 9px #aba48b;
+}
+        .button:active {
+            background-color: #7762e0;
+            box-shadow: 0 5px #817b68;
+            transform: translateY(4px);
+}
+    </style>
+  </head>
+  <body></body>
+  <script>
+
+    /* initialize jsPsych */
+    var jsPsych = initJsPsych({
+        //timeline: timeline,
+      on_finish: function() {
+        jsPsych.data.displayData();
+    }
+    });
+    /*start task*/
+      jsPsych.run(timeline);
+    
+
+  </script>
+</html>
