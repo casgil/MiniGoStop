@@ -1,5 +1,5 @@
-let stopTrials = 2;
-let targetTrials = 2;
+let stopTrials = 4;
+let targetTrials = 4;
 let novelTrials = 4;
 let stimDuration = 500;
 let fixDuration = 1000;
@@ -30,8 +30,8 @@ function shuffle(array) {
 }
 
 function createTrials(stopTrials, targetTrials, novelTrials) {
-    var stopList = [getStim(), getStim()];
-    var targetList = [getStim(), getStim()];
+    var stopList = [getStim(), getStim(), getStim(), getStim()];
+    var targetList = [getStim(), getStim(), getStim(), getStim()];
     var novelList = [getStim(), getStim(), getStim(), getStim()];
     let List = [];
 for (var i = 0; i < stopTrials; i++) {
