@@ -98,7 +98,8 @@ var timeline = [];
 var instructions1 = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
-    <p>The goal of this task is to correctly respond when the number presented on the screen is the same as the number that was presented right before it.
+    <p style = "font-size:40px;"><b>GoStop Task</b></p>
+    <p>The goal of this task is to correctly respond when the number presented on the screen is the same as the number that was presented right before it.</p>
     <p>Press next for more instructions.</p>
   `,
   choices: ['NEXT'],
@@ -109,9 +110,9 @@ timeline.push(instructions1);
 var instructions2 = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
-    <p>When you see a number that is the same as the number presented right before it, press the blue button as quickly as possible.</p><br></br>
-    <p>However, some numbers will turn orange a short time after they appear. Do NOT press the blue button in this case</p><br></br>
-   <p>Try to be as accurate as possible while still keeping up with the numbers. </p>
+    <p>When you see a number that is the same as the number presented right before it, press the blue button as quickly as possible.</p>
+    <p>However, some numbers will turn orange a short time after they appear. Do NOT press the blue button in this case</p>
+    <p>Try to be as accurate as possible while still keeping up with the numbers. </p>
     <p>Press the button below to begin.</p>
   `,
   choices: ['START'],
