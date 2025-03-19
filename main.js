@@ -102,8 +102,9 @@ var instructions1 = {
     <p style="font-size:20px;">The goal of this task is to correctly respond when the number presented on the screen is the same as the number that was presented right before it.</p>
     <p style="font-size:20px;">Press next for more instructions.</p>
   `,
-  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
   choices: ['NEXT'],
+  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
+
   post_trial_gap: 1000
 };
 timeline.push(instructions1);
@@ -116,7 +117,7 @@ var instructions2 = {
     <p>Try to be as accurate as possible while still keeping up with the numbers. </p>
     <p>Press the button below to begin.</p>
   `,
-    button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
+  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
   choices: ['START'],
   post_trial_gap: 1000
 };
