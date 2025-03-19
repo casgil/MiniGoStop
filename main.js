@@ -134,7 +134,7 @@ var complete_screen = {
   type: jsPsychHtmlButtonResponse,
   choices: ['FINISH'],
   stimulus: `
-    <p style="font-size:35px;">Press the button below to complete the task. Thank you!</p>
+    <p style="font-size:20px;">Press the button below to complete the task. Thank you!</p>
   `,
   button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>'
 
