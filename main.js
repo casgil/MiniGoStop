@@ -136,7 +136,7 @@ var complete_screen = {
   stimulus: `
     <p style="font-size:25px;">Press the button below to complete the task. Thank you!</p>
   `,
-  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
+  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>'
 
   };
 
