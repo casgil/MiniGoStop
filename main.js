@@ -38,8 +38,8 @@ for (var i = 0; i < stopTrials; i++) {
     var stopTrial =  {
         type: jsPsychHtmlButtonResponse,
         choices: ['Match'],
-        //button_html: '<button class="button" style="font-size: 50px; padding: 15px 30px; margin: 60px 120px;">%choice%</button>',
-        button_html: '<button class="buttontask">%choice%</button>',
+        button_html: '<button class="button" style="font-size: 50px; padding: 15px 30px; margin: 60px 10px;">%choice%</button>',
+        //button_html: '<button class="buttontask">%choice%</button>',
 
         response_ends_trial: false,
         timeline: [
