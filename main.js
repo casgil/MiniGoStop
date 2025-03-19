@@ -37,7 +37,6 @@ function createTrials(stopTrials, targetTrials, novelTrials) {
 for (var i = 0; i < stopTrials; i++) {
     var stopTrial =  {
         type: jsPsychHtmlButtonResponse,
-        //choices: ['✓'],
         choices: ['Match'],
         button_html: '<button class="button">%choice%</button>',
         response_ends_trial: false,
@@ -58,7 +57,6 @@ for (var i = 0; i < stopTrials; i++) {
 for (var i = 0; i < targetTrials; i++) {
    var targetTrial =  {
         type: jsPsychHtmlButtonResponse,
-        //choices: ['✓'],
         choices: ['Match'],
         button_html: '<button class="button">%choice%</button>',
         response_ends_trial: false,
@@ -78,7 +76,6 @@ for (var i = 0; i < targetTrials; i++) {
 for (var i = 0; i < novelTrials; i++) {
     var novelTrial = {
         type: jsPsychHtmlButtonResponse,
-        //choices: ['✓'],
         choices: ['Match'],
           button_html: '<button class="button">%choice%</button>',
           response_ends_trial: false,
