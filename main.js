@@ -98,7 +98,7 @@ var timeline = [];
 var instructions1 = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
-    <p style="font-size:30px;"><b>GoStop Task</b></p>
+    <p style="font-size:25px;"><b>GoStop Task</b></p>
     <p style="font-size:20px;">The goal of this task is to correctly respond when the number presented on the screen is the same as the number that was presented right before it.</p>
     <p style="font-size:20px;">Press next for more instructions.</p>
   `,
