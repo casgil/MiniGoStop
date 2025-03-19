@@ -115,6 +115,7 @@ var instructions2 = {
     <p>Try to be as accurate as possible while still keeping up with the numbers. </p>
     <p>Press the button below to begin.</p>
   `,
+    button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>'
   choices: ['START'],
   post_trial_gap: 1000
 };
