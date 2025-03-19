@@ -58,7 +58,7 @@ for (var i = 0; i < targetTrials; i++) {
    var targetTrial =  {
         type: jsPsychHtmlButtonResponse,
         choices: ['Match'],
-        button_html: '<button class="button">%choice%</button>',
+        button_html: '<button class="buttontask">%choice%</button>',
         response_ends_trial: false,
         timeline: [
             {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[i]+'</p>', trial_duration: stimDuration, stimulus_duration: stimDuration, data: {type: 'novel', correct_response: null}},
