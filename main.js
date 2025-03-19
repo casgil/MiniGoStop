@@ -133,6 +133,11 @@ timeline.push(task_procedure);
 var complete_screen = {
   type: jsPsychHtmlButtonResponse,
   choices: ['FINISH'],
-  stimulus: 'Press the button below to complete the task. Thank you!' }
+  stimulus: `
+    <p style="font-size:20px;">Press the button below to complete the task. Thank you!</p>
+  `
+  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
+
+  };
 
 timeline.push(complete_screen); 
