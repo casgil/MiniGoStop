@@ -98,9 +98,9 @@ var timeline = [];
 var instructions1 = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
-    <p style="font-size:40px;"><b>GoStop Task</b></p>
-    <p style="font-size:20px;">The goal of this task is to correctly respond when the number presented on the screen is the same as the number that was presented right before it.</p>
-    <p style="font-size:20px;">Press next for more instructions.</p>
+    <p style="font-size:50px;"><b>GoStop Task</b></p>
+    <p style="font-size:25px;">The goal of this task is to correctly respond when the number presented on the screen is the same as the number that was presented right before it.</p>
+    <p style="font-size:25px;">Press next for more instructions.</p>
   `,
   choices: ['NEXT'],
   button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
@@ -113,7 +113,7 @@ var instructions2 = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
     <p>When you see a number that is the same as the number presented right before it, press the blue button as quickly as possible.</p>
-    <p>However, some numbers will turn orange a short time after they appear. Do NOT press the blue button in this case</p>
+    <p>However, some numbers will turn orange a short time after they appear. Do NOT press the blue button in this case.</p>
     <p>Try to be as accurate as possible while still keeping up with the numbers. </p>
     <p>Press the button below to begin.</p>
   `,
@@ -134,8 +134,8 @@ var complete_screen = {
   type: jsPsychHtmlButtonResponse,
   choices: ['FINISH'],
   stimulus: `
-    <p style="font-size:20px;">Press the button below to complete the task. Thank you!</p>
-  `
+    <p style="font-size:25px;">Press the button below to complete the task. Thank you!</p>
+  `,
   button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
 
   };
