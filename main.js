@@ -112,10 +112,10 @@ timeline.push(instructions1);
 var instructions2 = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
-    <p>When you see a number that is the same as the number presented right before it, press the blue button as quickly as possible.</p>
-    <p>However, some numbers will turn orange a short time after they appear. Do NOT press the blue button in this case.</p>
-    <p>Try to be as accurate as possible while still keeping up with the numbers. </p>
-    <p>Press the button below to begin.</p>
+    <p style="font-size:25px;">When you see a number that is the same as the number presented right before it, press the blue button as quickly as possible.</p>
+    <p style="font-size:25px;">However, some numbers will turn orange a short time after they appear. Do NOT press the blue button in this case.</p>
+    <p style="font-size:25px;">Try to be as accurate as possible while still keeping up with the numbers. </p>
+    <p style="font-size:25px;">Press the button below to begin.</p>
   `,
   button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
   choices: ['START'],
