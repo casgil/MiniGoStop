@@ -102,6 +102,7 @@ var instructions1 = {
     <p style="font-size:20px;">The goal of this task is to correctly respond when the number presented on the screen is the same as the number that was presented right before it.</p>
     <p style="font-size:20px;">Press next for more instructions.</p>
   `,
+  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
   choices: ['NEXT'],
   post_trial_gap: 1000
 };
