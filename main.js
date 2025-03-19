@@ -103,7 +103,7 @@ var instructions1 = {
     <p style="font-size:20px;">Press next for more instructions.</p>
   `,
   choices: ['NEXT'],
-  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
+  button_html: '<button class="button" style="font-size: 20px; padding: 15px 30px;">%choice%</button>',
 
   post_trial_gap: 1000
 };
