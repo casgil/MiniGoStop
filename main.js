@@ -37,7 +37,8 @@ function createTrials(stopTrials, targetTrials, novelTrials) {
 for (var i = 0; i < stopTrials; i++) {
     var stopTrial =  {
         type: jsPsychHtmlButtonResponse,
-        choices: ['✓'],
+        //choices: ['✓'],
+        choices: ['Match'],
         button_html: '<button class="button">%choice%</button>',
         response_ends_trial: false,
         timeline: [
