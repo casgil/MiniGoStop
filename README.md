@@ -112,4 +112,4 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 
    The code can be found at line 53 in `qualtrics_question.js`.
 
-   [View the code component here](https://github.com/kelvinlim/MiniGoStop/blob/qualtrics_question.js#L53-L58)
+   [View the code component here](https://github.com/kelvinlim/MiniGoStop/blob/main/qualtrics_question.js#L53-L58)
