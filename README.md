@@ -2,7 +2,7 @@
 
 This repository contains the code for a GoStop task written in jspsych. 
 It was forked from the version
-written by Florence Larkin.  
+written by Florence Larkin (https://github.com/florencelarkin/MiniGoStop).  
 
 The reason for the fork was to change the size of the buttons and fonts to make it
 easier to run on mobile.  A future enhancement will be to have it adapt to platforms
@@ -16,7 +16,7 @@ Steps:
 
 1. Create a new Block to hold the task.
 2. Create a question.
-3. Add the following Javascript
+3. Add the following Javascript. [View the code component here](https://github.com/kelvinlim/MiniGoStop/blob/main/qualtrics_question.js)
    
 ```
 Qualtrics.SurveyEngine.addOnload(function()
