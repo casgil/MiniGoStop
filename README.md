@@ -110,6 +110,4 @@ Qualtrics.SurveyEngine.addOnUnload(function()
    jspsych task is passed to qualtrics to be saved in the response.  The EmbeddedData GoStop
    corresponds to the entry in the question JavaScript where the data is returned from jspsych.
 
-   The code can be found at line 53 in `qualtrics_question.js`.
-
-   [View the code component here](https://github.com/kelvinlim/MiniGoStop/blob/main/qualtrics_question.js#L53-L58)
+   The code can be found at line 53 in `qualtrics_question.js`.[View the code component here](https://github.com/kelvinlim/MiniGoStop/blob/main/qualtrics_question.js#L52-L58)
