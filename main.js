@@ -49,6 +49,29 @@ for (var i = 0; i < stopTrials; i++) {
             {stimulus:'<p style="font-size:60px;font-weight:bold;color:#ffc90e">'+stopList[i]+'</p>', trial_duration: stimDuration - interval, stimulus_duration: stimDuration - interval, data: {type: 'stop', correct_response: null}},
             {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}}
         ],
+        on_load: function() {
+        // Select the button within the current trial's element
+        const button = document.querySelector('.jspsych-btn');
+
+        if (button) {
+            // Add event listeners for both mouse and touch
+            button.addEventListener('mousedown', function() {
+                this.classList.add('active');
+            });
+
+            button.addEventListener('mouseup', function() {
+                this.classList.remove('active');
+            });
+
+            button.addEventListener('touchstart', function() {
+                this.classList.add('active');
+            });
+
+            button.addEventListener('touchend', function() {
+                this.classList.remove('active');
+            });
+        }
+    },
         on_finish: function(data){
           console.log();
           data.correct = data.response === data.correct_response;
@@ -68,6 +91,29 @@ for (var i = 0; i < targetTrials; i++) {
             {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[i]+'</p>', trial_duration: stimDuration, stimulus_duration: stimDuration, data: {type: 'target', correct_response: 0}},
             {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}}
         ],
+       on_load: function() {
+        // Select the button within the current trial's element
+        const button = document.querySelector('.jspsych-btn');
+
+        if (button) {
+            // Add event listeners for both mouse and touch
+            button.addEventListener('mousedown', function() {
+                this.classList.add('active');
+            });
+
+            button.addEventListener('mouseup', function() {
+                this.classList.remove('active');
+            });
+
+            button.addEventListener('touchstart', function() {
+                this.classList.add('active');
+            });
+
+            button.addEventListener('touchend', function() {
+                this.classList.remove('active');
+            });
+        }
+    },
         on_finish: function(data){
           console.log();
           data.correct = data.response === data.correct_response;
@@ -85,6 +131,29 @@ for (var i = 0; i < novelTrials; i++) {
         {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+novelList[i]+'</p>', trial_duration: stimDuration,  stimulus_duration: stimDuration, data: {type: 'novel', correct_response: null}},
         {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration,  stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}},
         ],
+        on_load: function() {
+        // Select the button within the current trial's element
+        const button = document.querySelector('.jspsych-btn');
+
+        if (button) {
+            // Add event listeners for both mouse and touch
+            button.addEventListener('mousedown', function() {
+                this.classList.add('active');
+            });
+
+            button.addEventListener('mouseup', function() {
+                this.classList.remove('active');
+            });
+
+            button.addEventListener('touchstart', function() {
+                this.classList.add('active');
+            });
+
+            button.addEventListener('touchend', function() {
+                this.classList.remove('active');
+            });
+        }
+    },
         on_finish: function(data){
           console.log();
           data.correct = data.response === data.correct_response;
