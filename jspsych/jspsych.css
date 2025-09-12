@@ -14,9 +14,9 @@
   box-shadow: 0 9px #aba48b;
 }
 .button:active {
-  background-color: #cc3f3f;
+  background-color: #7762e0;
   box-shadow: 0 5px #817b68;
-//  transform: translateY(4px);
+  transform: translateY(4px);
 }
 
 /*!*************************************************************************************************************!*\
