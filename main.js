@@ -179,3 +179,19 @@ const complete_screen = {
   };
 
 timeline.push(complete_screen); 
+
+// Initialize jsPsych after the timeline is built
+const jsPsych = initJsPsych({
+    on_finish: function() {
+        jsPsych.data.displayData();
+    }
+});
+
+// Run the experiment when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){
+        jsPsych.run(timeline);
+    });
+} else {
+    jsPsych.run(timeline);
+}

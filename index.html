@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Mini GoStop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <base href="/MiniGoStop/">
     <script defer src="./jspsych/jspsych.js"></script>
     <script defer src="./jspsych/plugin-html-keyboard-response.js"></script>
@@ -69,18 +70,4 @@
     </style>
   </head>
   <body></body>
-  <script>
-
-    /* initialize jsPsych */
-    var jsPsych = initJsPsych({
-        //timeline: timeline,
-      on_finish: function() {
-        jsPsych.data.displayData();
-    }
-    });
-    /*start task*/
-      jsPsych.run(timeline);
-    
-
-  </script>
 </html>
