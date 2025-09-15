@@ -1,103 +1,31 @@
-let stopTrials = 4;
-let targetTrials = 4;
-let novelTrials = 4;
-let stimDuration = 500;
-let fixDuration = 1000;
-let interval = 150;
+const stopTrials = 4;
+const targetTrials = 4;
+const novelTrials = 4;
+const stimDuration = 500;
+const fixDuration = 1000;
+const interval = 150;
 
 function getStim() {
-    var number = Math.floor(Math.random() * 90000) + 10000;
-    number.toString();
+    const number = Math.floor(Math.random() * 90000) + 10000;
     return number;
 }
 
-function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-    array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
+// Shared on_finish handler reused across trials
+function onFinishTrial(data){
+    data.correct = data.response === data.correct_response;
 }
 
-function createTrials(stopTrials, targetTrials, novelTrials) {
-    var stopList = [getStim(), getStim(), getStim(), getStim()];
-    var targetList = [getStim(), getStim(), getStim(), getStim()];
-    var novelList = [getStim(), getStim(), getStim(), getStim()];
-    let List = [];
-for (var i = 0; i < stopTrials; i++) {
-    var stopTrial =  {
-        type: jsPsychHtmlButtonResponse,
-        choices: ['Match'],
-        button_html: '<button class="button" style="font-size: 50px; padding: 15px 30px; margin: 60px 10px;">%choice%</button>',
-        //button_html: '<button class="buttontask">%choice%</button>',
-
-        response_ends_trial: false,
-        timeline: [
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+stopList[i]+'</p>', trial_duration: stimDuration, stimulus_duration: stimDuration, data: {type: 'novel', correct_response: null}},
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}},
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+stopList[i]+'</p>', trial_duration: interval, stimulus_duration: interval, data: {type: 'stop', correct_response: null}},
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#ffc90e">'+stopList[i]+'</p>', trial_duration: stimDuration - interval, stimulus_duration: stimDuration - interval, data: {type: 'stop', correct_response: null}},
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}}
-        ],        
-        on_finish: function(data){
-          console.log();
-          data.correct = data.response === data.correct_response;
-        }
-    }
-    List.push(stopTrial)
-}
-for (var i = 0; i < targetTrials; i++) {
-   var targetTrial =  {
-        type: jsPsychHtmlButtonResponse,
-        choices: ['Match'],
-        button_html: '<button class="button" style="font-size: 50px; padding: 15px 30px; margin: 60px 10px;">%choice%</button>',
-        response_ends_trial: false,
-        timeline: [
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[i]+'</p>', trial_duration: stimDuration, stimulus_duration: stimDuration, data: {type: 'novel', correct_response: null}},
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}},
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+targetList[i]+'</p>', trial_duration: stimDuration, stimulus_duration: stimDuration, data: {type: 'target', correct_response: 0}},
-            {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration, stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}}
-        ],       
-        on_finish: function(data){
-          console.log();
-          data.correct = data.response === data.correct_response;
-        }
-    }
-    List.push(targetTrial)
-}
-for (var i = 0; i < novelTrials; i++) {
-    var novelTrial = {
-        type: jsPsychHtmlButtonResponse,
-        choices: ['Match'],
-        button_html: '<button class="button" style="font-size: 50px; padding: 15px 30px; margin: 60px 10px;">%choice%</button>',
-          response_ends_trial: false,
-        timeline: [
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+novelList[i]+'</p>', trial_duration: stimDuration,  stimulus_duration: stimDuration, data: {type: 'novel', correct_response: null}},
-        {stimulus:'<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>', trial_duration: fixDuration,  stimulus_duration: fixDuration, data: {type: 'fixation', correct_response: null}},
-        ],       
-        on_finish: function(data){
-          console.log();
-          data.correct = data.response === data.correct_response;
-        }
-      }
-     List.push(novelTrial)
- }
-return List;
+function buildTrialVariables(stopCount, targetCount, novelCount){
+    const vars = [];
+    for (let i = 0; i < stopCount; i++) vars.push({ stimulus: getStim(), kind: 'stop' });
+    for (let i = 0; i < targetCount; i++) vars.push({ stimulus: getStim(), kind: 'target' });
+    for (let i = 0; i < novelCount; i++) vars.push({ stimulus: getStim(), kind: 'novel' });
+    return vars;
 }
 
-var timeline = [];
+const timeline = [];
 
-var instructions1 = {
+const instructions1 = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
     <p style="font-size:25px;"><b>GoStop Task</b></p>
@@ -105,13 +33,14 @@ var instructions1 = {
     <p style="font-size:20px;">Press next for more instructions.</p>
   `,
   choices: ['NEXT'],
-  button_html: '<button class="button" style="font-size: 20px; padding: 15px 30px;">%choice%</button>',
+  button_html: '<button class="button button--sm">%choice%</button>',
+  response_ends_trial: true,
 
   post_trial_gap: 1000
 };
 timeline.push(instructions1);
 
-var instructions2 = {
+const instructions2 = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
     <p style="font-size:20px;">When you see a number that is the same as the number presented right before it, press the blue button as quickly as possible.</p>
@@ -119,26 +48,133 @@ var instructions2 = {
     <p style="font-size:20px;">Try to be as accurate as possible while still keeping up with the numbers. </p>
     <p style="font-size:20px;">Press the button below to begin.</p>
   `,
-  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>',
+  button_html: '<button class="button button--md">%choice%</button>',
   choices: ['START'],
+  response_ends_trial: true,
   post_trial_gap: 1000
 };
 timeline.push(instructions2);
 
-var task_procedure = {
-    //shuffle fn returns timeline list of randomized trials e.g. (novel5, stop3, ...,target1, novel1)
-    timeline: shuffle(createTrials(stopTrials,targetTrials,novelTrials)),
+const task_procedure = {
+    timeline_variables: buildTrialVariables(stopTrials, targetTrials, novelTrials),
+    randomize_order: true,
+    timeline: [
+        {
+            type: jsPsychHtmlButtonResponse,
+            choices: ['Match'],
+            button_html: '<button class="button button--task">%choice%</button>',
+            response_ends_trial: false,
+            stimulus: function(){
+                const s = jsPsych.timelineVariable('stimulus');
+                return '<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+s+'</p>';
+            },
+            trial_duration: stimDuration,
+            stimulus_duration: stimDuration,
+            data: { type: 'novel', correct_response: null },
+            on_finish: onFinishTrial
+        },
+        {
+            type: jsPsychHtmlButtonResponse,
+            choices: ['Match'],
+            button_html: '<button class="button button--task">%choice%</button>',
+            response_ends_trial: false,
+            stimulus: '<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>',
+            trial_duration: fixDuration,
+            stimulus_duration: fixDuration,
+            data: { type: 'fixation', correct_response: null },
+            on_finish: onFinishTrial
+        },
+        {
+            timeline: [
+                {
+                    type: jsPsychHtmlButtonResponse,
+                    choices: ['Match'],
+                    button_html: '<button class="button button--task">%choice%</button>',
+                    response_ends_trial: false,
+                    stimulus: function(){
+                        const s = jsPsych.timelineVariable('stimulus');
+                        return '<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+s+'</p>';
+                    },
+                    trial_duration: interval,
+                    stimulus_duration: interval,
+                    data: { type: 'stop', correct_response: null },
+                    on_finish: onFinishTrial
+                },
+                {
+                    type: jsPsychHtmlButtonResponse,
+                    choices: ['Match'],
+                    button_html: '<button class="button button--task">%choice%</button>',
+                    response_ends_trial: false,
+                    stimulus: function(){
+                        const s = jsPsych.timelineVariable('stimulus');
+                        return '<p style="font-size:60px;font-weight:bold;color:#ffc90e">'+s+'</p>';
+                    },
+                    trial_duration: stimDuration - interval,
+                    stimulus_duration: stimDuration - interval,
+                    data: { type: 'stop', correct_response: null },
+                    on_finish: onFinishTrial
+                },
+                {
+                    type: jsPsychHtmlButtonResponse,
+                    choices: ['Match'],
+                    button_html: '<button class="button button--task">%choice%</button>',
+                    response_ends_trial: false,
+                    stimulus: '<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>',
+                    trial_duration: fixDuration,
+                    stimulus_duration: fixDuration,
+                    data: { type: 'fixation', correct_response: null },
+                    on_finish: onFinishTrial
+                }
+            ],
+            conditional_function: function(){
+                return jsPsych.timelineVariable('kind') === 'stop';
+            }
+        },
+        {
+            timeline: [
+                {
+                    type: jsPsychHtmlButtonResponse,
+                    choices: ['Match'],
+                    button_html: '<button class="button button--task">%choice%</button>',
+                    response_ends_trial: false,
+                    stimulus: function(){
+                        const s = jsPsych.timelineVariable('stimulus');
+                        return '<p style="font-size:60px;font-weight:bold;color:#3f48cc">'+s+'</p>';
+                    },
+                    trial_duration: stimDuration,
+                    stimulus_duration: stimDuration,
+                    data: { type: 'target', correct_response: 0 },
+                    on_finish: onFinishTrial
+                },
+                {
+                    type: jsPsychHtmlButtonResponse,
+                    choices: ['Match'],
+                    button_html: '<button class="button button--task">%choice%</button>',
+                    response_ends_trial: false,
+                    stimulus: '<p style="font-size:60px;font-weight:bold;color:#3f48cc">+</p>',
+                    trial_duration: fixDuration,
+                    stimulus_duration: fixDuration,
+                    data: { type: 'fixation', correct_response: null },
+                    on_finish: onFinishTrial
+                }
+            ],
+            conditional_function: function(){
+                return jsPsych.timelineVariable('kind') === 'target';
+            }
+        }
+    ]
 }
 timeline.push(task_procedure);
 
 
-var complete_screen = {
+const complete_screen = {
   type: jsPsychHtmlButtonResponse,
   choices: ['FINISH'],
   stimulus: `
     <p style="font-size:20px;">Press the button below to complete the task. Thank you!</p>
   `,
-  button_html: '<button class="button" style="font-size: 24px; padding: 15px 30px;">%choice%</button>'
+  button_html: '<button class="button button--md">%choice%</button>',
+  response_ends_trial: true
 
   };
 

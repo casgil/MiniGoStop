@@ -3,11 +3,11 @@
   <head>
     <title>Mini GoStop</title>
     <base href="/MiniGoStop/">
-    <script src="./jspsych/jspsych.js"></script>
-    <script src="./jspsych/plugin-html-keyboard-response.js"></script>
-    <script src="./jspsych/plugin-html-button-response.js"></script>
+    <script defer src="./jspsych/jspsych.js"></script>
+    <script defer src="./jspsych/plugin-html-keyboard-response.js"></script>
+    <script defer src="./jspsych/plugin-html-button-response.js"></script>
     <link href="./jspsych/jspsych.css" rel="stylesheet" type="text/css" />
-    <script src="./main.js"></script>
+    <script defer src="./main.js"></script>
     <style>
       #display_stage_background {
         width: 100vw;
@@ -47,6 +47,9 @@
             box-shadow: 0 5px #817b68;
             transform: translateY(4px);
 }
+        .button--sm { font-size: 20px; }
+        .button--md { font-size: 24px; }
+        .button--task { font-size: 50px; margin: 60px 10px; }
         .buttontask {
             background-color: #1411e4; 
             border: none;
