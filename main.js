@@ -183,7 +183,23 @@ timeline.push(complete_screen);
 // Initialize jsPsych after the timeline is built
 const jsPsych = initJsPsych({
     on_finish: function() {
-        jsPsych.data.displayData();
+        // Signal completion to parent (e.g., Qualtrics) with data payload
+        try {
+            if (window.parent) {
+                window.parent.postMessage({
+                    type: 'MINIGOSTOP_DONE',
+                    payload: jsPsych.data.get().values()
+                }, '*');
+            }
+        } catch (e) {}
+
+        // Show data only when not embedded
+        try {
+            var isEmbedded = /[?&]embed=1(?!\w)/.test(window.location.search);
+            if (!isEmbedded) {
+                jsPsych.data.displayData();
+            }
+        } catch (e) {}
     }
 });
 
