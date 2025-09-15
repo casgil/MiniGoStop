@@ -190,8 +190,36 @@ const jsPsych = initJsPsych({
 // Run the experiment when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function(){
+        addButtonPressFeedback();
         jsPsych.run(timeline);
     });
 } else {
+    addButtonPressFeedback();
     jsPsych.run(timeline);
+}
+
+// Adds visual feedback for quick taps on mobile by toggling a pressed class
+function addButtonPressFeedback(){
+    // Delegate events to document so dynamically created buttons are handled
+    document.addEventListener('pointerdown', function(ev){
+        const el = ev.target.closest('button.button');
+        if (!el) return;
+        el.classList.add('button--pressed');
+    }, { passive: true });
+    document.addEventListener('pointerup', function(ev){
+        const el = ev.target.closest('button.button');
+        if (!el) return;
+        el.classList.remove('button--pressed');
+    }, { passive: true });
+    document.addEventListener('pointercancel', function(ev){
+        const el = ev.target.closest('button.button');
+        if (!el) return;
+        el.classList.remove('button--pressed');
+    }, { passive: true });
+    // Also remove on scroll/blur just in case
+    window.addEventListener('blur', function(){
+        document.querySelectorAll('button.button.button--pressed').forEach(function(btn){
+            btn.classList.remove('button--pressed');
+        });
+    });
 }
